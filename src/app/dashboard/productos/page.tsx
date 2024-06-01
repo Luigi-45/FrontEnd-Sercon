@@ -88,7 +88,7 @@ const NombreModal: React.FC<NombreModalProps> = ({ open, onClose, onSubmit }) =>
     >
       <Box
         sx={{
-          position: 'absolute' as 'absolute',
+          position: 'absolute' as const,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -146,7 +146,7 @@ const FechaModal: React.FC<FechaModalProps> = ({ open, onClose, onSubmit }) => {
     >
       <Box
         sx={{
-          position: 'absolute' as 'absolute',
+          position: 'absolute' as const,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',

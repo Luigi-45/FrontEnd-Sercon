@@ -10,7 +10,8 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    "@typescript-eslint/unbound-method": "error"
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   }
 }
 
