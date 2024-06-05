@@ -53,7 +53,7 @@ class AuthClient {
 
   async signInWithPassword(params: SignInWithPasswordParams): Promise<{ error?: string }> {
     const { email, contrasenia } = params;
-    const LOGIN_API_BASE_URL = "http://localhost:8086/api/usuarios/validate";
+    const LOGIN_API_BASE_URL = "http://34.95.254.36:8086/api/usuarios/validate";
   
     try {
       const response = await fetch(LOGIN_API_BASE_URL, {

@@ -36,8 +36,8 @@ const schema = zod.object({
 
 type Values = zod.infer<typeof schema>;
 
-const LOGIN_API_BASE_URL = "http://localhost:8086/api/usuarios/save";
-const PERSONAL_API_BASE_URL = "http://localhost:8086/api/personal/save";
+const LOGIN_API_BASE_URL = "http://34.95.254.36:8086/api/usuarios/save";
+const PERSONAL_API_BASE_URL = "http://34.95.254.36:8086/api/personal/save";
 
 const defaultValues = { nombres: '', apellidos: '', email: '', contraseña: '', edad: '', genero: '', num_telefonico: '', dni: '', terms: false } satisfies Values;
 
