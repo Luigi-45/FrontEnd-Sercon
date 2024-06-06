@@ -13,7 +13,7 @@ import { DateTime } from 'luxon';
 import { SelectChangeEvent } from '@mui/material';
 
 export async function handleDeleteCategoria(id: number, reloadTable: () => void, notifyD: () => void) {
-    const CATEGORIA_DELETE_API_BASE_URL = "http://localhost:8084/api/categoria-producto/delete/" + id;
+    const CATEGORIA_DELETE_API_BASE_URL = "http://34.39.134.134:8084/api/categoria-producto/delete/" + id;
     try {
         const response = await fetch(CATEGORIA_DELETE_API_BASE_URL, {
             method: 'DELETE',
@@ -47,7 +47,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose,categoria,
 
     const handleSave = async (id: number) => {
         try {
-            const response = await fetch("http://localhost:8084/api/categoria-producto/update/"+id, {
+            const response = await fetch("http://34.39.134.134:8084/api/categoria-producto/update/"+id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

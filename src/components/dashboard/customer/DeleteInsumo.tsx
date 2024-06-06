@@ -17,9 +17,9 @@ import { z, ZodError } from 'zod';
 import notifyD from "@/app/dashboard/customers/page";
 
 
-const ALMACEN_API_BASE_URL = "http://localhost:8085/api/almacen";
-const PROVEEDOR_API_BASE_URL = "http://localhost:8085/api/proveedores";
-const INSUMO_CATEGORIA_API_BASE_URL = "http://localhost:8083/api/categoria-insumo";
+const ALMACEN_API_BASE_URL = "http://35.198.40.220:8085/api/almacen";
+const PROVEEDOR_API_BASE_URL = "http://35.198.40.220:8085/api/proveedores";
+const INSUMO_CATEGORIA_API_BASE_URL = "http://35.198.13.111:83/api/categoria-insumo";
 
 const InsumoSchema = z.object({
     nombre: z.string().min(3).max(20).refine(value => /^[a-zA-Z]+$/.test(value), {
@@ -69,7 +69,7 @@ interface Categoria {
 }
 
 export async function handleDeleteInsumo(id: number, reloadTable: () => void, notifyD: () => void) {
-    const INSUMO_DELETE_API_BASE_URL = "http://localhost:8083/api/insumo/delete/" + id;
+    const INSUMO_DELETE_API_BASE_URL = "http://35.198.13.111:83/api/insumo/delete/" + id;
     try {
         const response = await fetch(INSUMO_DELETE_API_BASE_URL, {
             method: 'DELETE',
@@ -161,7 +161,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, insumo, r
 
             const validatedData = InsumoSchema.parse(formattedValidate);
 
-            const response = await fetch("http://localhost:8083/api/insumo/update/" + id, {
+            const response = await fetch("http://35.198.13.111:83/api/insumo/update/" + id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Modal, TextField, Button, Typography, Stack, Select, MenuItem, InputLabel, Alert, AlertTitle } from '@mui/material';
 import { z, ZodError } from 'zod';
 
-const ALMACEN_SAVE_API_BASE_URL = "http://localhost:8085/api/almacen/save";
+const ALMACEN_SAVE_API_BASE_URL = "http://35.198.40.220:8085/api/almacen/save";
 
 const AlmacenSchema = z.object({
     nombre_almacen: z.string().min(3).max(20).refine(value => /^[a-zA-Z]+$/.test(value), {

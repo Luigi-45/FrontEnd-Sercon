@@ -32,7 +32,7 @@ const ProveedorSchema = z.object({
 });
 
 export async function handleDeleteProveedor(id: number, reloadTable: () => void, notifyD: () => void) {
-    const PROVEEDOR_DELETE_API_BASE_URL = "http://localhost:8085/api/proveedores/delete/" + id;
+    const PROVEEDOR_DELETE_API_BASE_URL = "http://35.198.40.220:8085/api/proveedores/delete/" + id;
     try {
         const response = await fetch(PROVEEDOR_DELETE_API_BASE_URL, {
             method: 'DELETE',
@@ -67,7 +67,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, proveedor
     const handleSave = async (id: number) => {
         try {
             const validatedData = ProveedorSchema.parse(formData);
-            const response = await fetch("http://localhost:8085/api/proveedores/update/" + id, {
+            const response = await fetch("http://35.198.40.220:8085/api/proveedores/update/" + id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ import { z, ZodError } from 'zod';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const INSUMO_API_BASE_URL = "http://localhost:8083/api/insumo";
+const INSUMO_API_BASE_URL = "http://35.198.13.111:83/api/insumo";
 
 const notify = () => toast.success("Se agrego correctamente");
 const notifyD = () => toast.error("Se elimino correctamente");
@@ -63,7 +63,6 @@ const NombreModal: React.FC<NombreModalProps> = ({ open, onClose, onSubmit }) =>
                     case 'invalid_type':
                         fieldErrors[err.path.join('.')] = 'El tipo de dato es inválido.';
                         break;
-                    // Agrega más casos según sea necesario para otras validaciones
                     default:
                         fieldErrors[err.path.join('.')] = err.message;
                         break;
@@ -255,7 +254,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8083/api/report/general', {
+      const response = await fetch('http://35.198.13.111:83/api/report/general', {
         method: 'GET',
 
       });
@@ -282,7 +281,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchDataSO = async () => {
     try {
-      const response = await fetch('http://localhost:8083/api/report/stockout', {
+      const response = await fetch('http://35.198.13.111:83/api/report/stockout', {
         method: 'GET',
 
       });
@@ -309,7 +308,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchDataSA = async () => {
     try {
-      const response = await fetch('http://localhost:8083/api/report/sobreabastecimiento', {
+      const response = await fetch('http://35.198.13.111:83/api/report/sobreabastecimiento', {
         method: 'GET',
 
       });
@@ -336,7 +335,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchDataRotacion = async () => {
     try {
-      const response = await fetch('http://localhost:8083/api/report/movimiento', {
+      const response = await fetch('http://35.198.13.111:83/api/report/movimiento', {
         method: 'GET',
 
       });
@@ -363,7 +362,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchDataNombre = async (nombre: string): Promise<void> => {
     try {
-      const response = await fetch(`http://localhost:8083/api/report/nombre?nombre=${encodeURIComponent(nombre)}`, {
+      const response = await fetch(`http://35.198.13.111:83/api/report/nombre?nombre=${encodeURIComponent(nombre)}`, {
         method: 'GET',
       });
       if (response.ok) {
@@ -401,7 +400,7 @@ export default function Page(): React.JSX.Element {
 
   const fetchDataFecha = async (fechaInicio: Date, fechaFin: Date) => {
     try {
-      const url = new URL('http://localhost:8083/api/report/fecha');
+      const url = new URL('http://35.198.13.111:83/api/report/fecha');
       url.searchParams.append('fechaInicio', fechaInicio.toISOString());
       url.searchParams.append('fechaFin', fechaFin.toISOString());
   

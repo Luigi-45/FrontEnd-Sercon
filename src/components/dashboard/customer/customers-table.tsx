@@ -23,7 +23,7 @@ import { OpcionModal } from '@/components/dashboard/customer/ModifyLimits';
 
 import { useSelection } from '@/hooks/use-selection';
 
-const LIMITE_CATEGORIA_API_BASE_URL = "http://localhost:8083/api/limite-insumo/findByInsumoId/";
+const LIMITE_CATEGORIA_API_BASE_URL = "http://35.198.13.111:83/api/limite-insumo/findByInsumoId/";
 
 function noop(): void {
 }

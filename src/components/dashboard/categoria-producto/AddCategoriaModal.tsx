@@ -8,7 +8,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { DateTime } from 'luxon';
 import { SelectChangeEvent } from '@mui/material';
 
-const CATEGORIA_SAVE_API_BASE_URL = "http://localhost:8084/api/categoria-producto/save";
+const CATEGORIA_SAVE_API_BASE_URL = "http://34.39.134.134:8084/api/categoria-producto/save";
 
 export default function AddCategoriaModal({ open, onClose, reloadTable, notify }: { open: boolean, onClose: () => void, reloadTable: () => void, notify: () => void }) {
     const initialFormData = {

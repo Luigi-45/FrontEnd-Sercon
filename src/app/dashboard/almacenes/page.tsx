@@ -18,7 +18,7 @@ import  ToastProvider  from "../../../components/alerts/ToastProvider";
 import { toast } from 'react-toastify';
 
 
-const ALMACEN_API_BASE_URL = "http://localhost:8085/api/almacen";
+const ALMACEN_API_BASE_URL = "http://35.198.40.220:8085/api/almacen";
 
 const notify = () => toast.success("Se agrego correctamente");
 const notifyD = () => toast.error("Se elimino correctamente");

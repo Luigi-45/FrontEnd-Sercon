@@ -12,11 +12,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import { z, ZodError } from 'zod';
 import 'react-toastify/dist/ReactToastify.css';
 
-const INSUMO_SAVE_API_BASE_URL = "http://localhost:8083/api/insumo/save";
-const ALMACEN_API_BASE_URL = "http://localhost:8085/api/almacen";
-const PROVEEDOR_API_BASE_URL = "http://localhost:8085/api/proveedores";
-const INSUMO_CATEGORIA_API_BASE_URL = "http://localhost:8083/api/categoria-insumo";
-const LIMITE_INSUMO_SAVE_API_BASE_URL = "http://localhost:8083/api/limite-insumo/save";
+const INSUMO_SAVE_API_BASE_URL = "http://35.198.13.111:83/api/insumo/save";
+const ALMACEN_API_BASE_URL = "http://35.198.40.220:8085/api/almacen";
+const PROVEEDOR_API_BASE_URL = "http://35.198.40.220:8085/api/proveedores";
+const INSUMO_CATEGORIA_API_BASE_URL = "http://35.198.13.111:83/api/categoria-insumo";
+const LIMITE_INSUMO_SAVE_API_BASE_URL = "http://35.198.13.111:83/api/limite-insumo/save";
 
 const InsumoSchema = z.object({
     nombre: z.string().min(3).max(20).refine(value => /^[a-zA-Z]+$/.test(value), {

@@ -16,7 +16,7 @@ import  ToastProvider  from "../../../components/alerts/ToastProvider";
 import { toast } from 'react-toastify';
 
 
-const CATEGORIA_API_BASE_URL = "http://localhost:8083/api/categoria-insumo";
+const CATEGORIA_API_BASE_URL = "http://35.198.13.111:83/api/categoria-insumo";
 
 const notify = () => toast.success("Se agrego correctamente");
 const notifyD = () => toast.error("Se elimino correctamente");

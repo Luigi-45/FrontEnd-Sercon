@@ -10,10 +10,10 @@ import { z, ZodError } from 'zod';
 import FormHelperText from '@mui/material/FormHelperText';
 import { SelectChangeEvent, Grid, FormControl } from '@mui/material';
 
-const PRODUCTO_SAVE_API_BASE_URL = "http://localhost:8084/api/producto/save";
-const ALMACEN_API_BASE_URL = "http://localhost:8085/api/almacen";
-const PRODUCTO_CATEGORIA_API_BASE_URL = "http://localhost:8084/api/categoria-producto";
-const LIMITE_PRODUCTO_SAVE_API_BASE_URL = "http://localhost:8084/api/limite-producto/save";
+const PRODUCTO_SAVE_API_BASE_URL = "http://34.39.134.134:8084/api/producto/save";
+const ALMACEN_API_BASE_URL = "http://35.198.40.220:8085/api/almacen";
+const PRODUCTO_CATEGORIA_API_BASE_URL = "http://34.39.134.134:8084/api/categoria-producto";
+const LIMITE_PRODUCTO_SAVE_API_BASE_URL = "http://34.39.134.134:8084/api/limite-producto/save";
 
 const ProductoSchema = z.object({
     nombre: z.string().min(3).max(20).refine(value => /^[a-zA-Z]+$/.test(value), {

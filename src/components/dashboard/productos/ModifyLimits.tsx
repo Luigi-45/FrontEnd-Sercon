@@ -45,7 +45,7 @@ export const OpcionModal: React.FC<OpcionModalProps> = ({ isOpen, onClose, limit
                 limite_sobreabastecimiento: formData.limite_sobreabastecimiento
             };
             const validatedData = LimiteSchema.parse(formattedValidate);
-            const response = await fetch("http://localhost:8084/api/limite-producto/update/" + id, {
+            const response = await fetch("http://34.39.134.134:8084/api/limite-producto/update/" + id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

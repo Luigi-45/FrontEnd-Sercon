@@ -46,7 +46,7 @@ export const OpcionModal: React.FC<OpcionModalProps> = ({ isOpen, onClose, limit
             };
             const validatedData = LimiteSchema.parse(formattedValidate);
             console.log(id)
-            const response = await fetch("http://localhost:8083/api/limite-insumo/update/" + id, {
+            const response = await fetch("http://35.198.13.111:83/api/limite-insumo/update/" + id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -28,7 +28,7 @@ const AlmacenSchema = z.object({
 });
 
 export async function handleDeleteAlmacen(id: number, reloadTable: () => void, notifyD: () => void) {
-    const ALMACEN_DELETE_API_BASE_URL = "http://localhost:8085/api/almacen/delete/" + id;
+    const ALMACEN_DELETE_API_BASE_URL = "http://35.198.40.220:8085/api/almacen/delete/" + id;
     
     try {
         const response = await fetch(ALMACEN_DELETE_API_BASE_URL, {
@@ -64,7 +64,7 @@ export const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose,almacen, r
     const handleSave = async (id: number) => {
         try {
             const validatedData = AlmacenSchema.parse(formData);
-            const response = await fetch("http://localhost:8085/api/almacen/update/"+id, {
+            const response = await fetch("http://35.198.40.220:8085/api/almacen/update/"+id, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ import { OpcionModal } from '@/components/dashboard/productos/ModifyLimits';
 
 import { useSelection } from '@/hooks/use-selection';
 
-const LIMITE_CATEGORIA_API_BASE_URL = "http://localhost:8084/api/limite-producto/findByProductoId/";
+const LIMITE_CATEGORIA_API_BASE_URL = "http://34.39.134.134:8084/api/limite-producto/findByProductoId/";
 
 function noop(): void {
 }

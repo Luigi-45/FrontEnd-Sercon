@@ -20,8 +20,8 @@ import { UserPopover } from './user-popover';
 import { Producto } from '../productos/productos-table';
 
 const ALARMA_I_API_BASE_URL = "http://35.198.13.111:83/api/alarma-insumo"
-const ALARMA_P_API_BASE_URL = "http://localhost:8084/api/alarma-producto"
-const PRODUCTO_API_BASE_URL = "http://localhost:8084/api/producto"
+const ALARMA_P_API_BASE_URL = "http://34.39.134.134:8084/api/alarma-producto"
+const PRODUCTO_API_BASE_URL = "http://34.39.134.134:8084/api/producto"
 
 function AsyncInsumo({ insumoId }: { insumoId: number }) {
   const [insumo, setInsumo] = useState<Insumo | null>(null);
@@ -41,7 +41,7 @@ function AsyncInsumo({ insumoId }: { insumoId: number }) {
   useEffect(() => {
     const fetchInsumo = async () => {
       try {
-        const response = await fetch(`http://localhost:8083/api/insumo/findById/${insumoId}`);
+        const response = await fetch(`http://35.198.13.111:83/api/insumo/findById/${insumoId}`);
         const data = await response.json();
         setInsumo(data);
       } catch (error) {
@@ -72,7 +72,7 @@ function AsyncProducto({ productoId }: { productoId: number }) {
   useEffect(() => {
     const fetchInsumo = async () => {
       try {
-        const response = await fetch(`http://localhost:8084/api/producto/findById/${productoId}`);
+        const response = await fetch(`http://34.39.134.134:8084/api/producto/findById/${productoId}`);
         const data = await response.json();
         setProducto(data);
       } catch (error) {

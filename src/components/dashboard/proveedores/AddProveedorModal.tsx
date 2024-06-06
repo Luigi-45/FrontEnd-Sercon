@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { z, ZodError } from 'zod';
 import { Modal, TextField, Button, Typography, Stack, Select, MenuItem, InputLabel, Alert, AlertTitle } from '@mui/material';
 
-const PROVEEDOR_SAVE_API_BASE_URL = "http://localhost:8085/api/proveedores/save";
+const PROVEEDOR_SAVE_API_BASE_URL = "http://35.198.40.220:8085/api/proveedores/save";
 
 const ProveedorSchema = z.object({
     nombre_empresa: z.string().min(3).max(20).refine(value => /^[a-zA-Z]+$/.test(value), {
