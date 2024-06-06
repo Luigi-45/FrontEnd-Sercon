@@ -30,7 +30,7 @@ interface User {
 }
 
 const email = localStorage.getItem('user-email');
-const USER_API_BASE_URL = `http://localhost:8086/api/personal/findByEmail/${email}`;
+const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
 
 export function AccountDetailsForm(): React.JSX.Element {
   const [user, setUser] = React.useState<User | null>(null);

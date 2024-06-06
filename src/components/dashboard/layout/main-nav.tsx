@@ -19,7 +19,7 @@ import { MobileNav } from './mobile-nav';
 import { UserPopover } from './user-popover';
 import { Producto } from '../productos/productos-table';
 
-const ALARMA_I_API_BASE_URL = "http://localhost:8083/api/alarma-insumo"
+const ALARMA_I_API_BASE_URL = "http://35.198.13.111:83/api/alarma-insumo"
 const ALARMA_P_API_BASE_URL = "http://localhost:8084/api/alarma-producto"
 const PRODUCTO_API_BASE_URL = "http://localhost:8084/api/producto"
 
