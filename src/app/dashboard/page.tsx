@@ -10,7 +10,7 @@ import { TotalProfit } from '@/components/dashboard/overview/total-profit';
 import { Sales } from '@/components/dashboard/overview/sales';
 import { Traffic } from '@/components/dashboard/overview/traffic';
 
-const MOVIMIENTO_API_BASE_URL = "http://localhost:8085/api/movimiento";
+const MOVIMIENTO_API_BASE_URL = "http://35.198.40.220:8085/api/movimiento";
 
 interface Movimiento {
   id: number;

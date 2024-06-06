@@ -48,7 +48,7 @@ export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): Reac
 
     const fetchUsuarioFromAPI = async () => {
       try {
-        const response = await fetch(`http://localhost:8086/api/personal/findByEmail/${email}`);
+        const response = await fetch(`http://34.95.254.36:8086/api/personal/findByEmail/${email}`);
 
         if (!response.ok) {
           throw new Error('Error al obtener los datos del usuario');
