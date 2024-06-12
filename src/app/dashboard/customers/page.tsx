@@ -440,9 +440,12 @@ export default function Page(): React.JSX.Element {
         <Stack direction="row" spacing={3}>
           <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
             <Typography variant="h4">Lista de Insumos</Typography>
-            <Stack direction={isSmallScreen ? 'column' : 'row'}
-              spacing={1}
-              sx={{ alignItems: 'center' }}>
+            <Stack
+              direction={isSmallScreen ? 'column' : 'row'}
+              spacing={isSmallScreen ? 2 : 4}
+              justifyContent={isSmallScreen ? 'center' : 'flex-start'}
+              mb={2}
+            >
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonClick}>
                 Estado General
               </Button>
