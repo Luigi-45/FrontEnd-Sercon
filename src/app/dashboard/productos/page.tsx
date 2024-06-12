@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import { Modal, Box, Typography, TextField, Button, Alert, AlertTitle, Stack } from "@mui/material";
+import { Modal, Box, Typography, TextField, Button, Stack, useMediaQuery, useTheme } from "@mui/material";
 import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
 import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
 import { Producto } from '@/components/dashboard/productos/productos-table';
@@ -202,6 +202,9 @@ export default function Page(): React.JSX.Element {
   const [openModal, setOpenModal] = useState(false);
   const [openNombreModal, setOpenNombreModal] = useState(false);
   const [openFechaModal, setOpenFechaModal] = useState<boolean>(false);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
 
   useEffect(() => {
@@ -426,7 +429,9 @@ export default function Page(): React.JSX.Element {
         <Stack direction="row" spacing={3}>
           <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
             <Typography variant="h4">Lista de Productos</Typography>
-            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+            <Stack direction={isSmallScreen ? 'column' : 'row'}
+              spacing={1}
+              sx={{ alignItems: 'center' }}>
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonClick}>
                 Estado General
               </Button>
@@ -434,7 +439,7 @@ export default function Page(): React.JSX.Element {
                 Estado por Nombre
               </Button>
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonFechaClick}>
-                Estado por Fecha
+                Estado por fecha
               </Button>
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonSOClick}>
                 Alertas Stockout
@@ -443,7 +448,7 @@ export default function Page(): React.JSX.Element {
                 Alertas Sobreabastecimiento
               </Button>
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonRotacionClick}>
-                Rotación
+                Rotacion
               </Button>
             </Stack>
           </Stack>
