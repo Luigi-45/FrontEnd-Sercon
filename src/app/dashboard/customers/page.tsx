@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
 import type { Metadata } from 'next';
-import { Alert, AlertTitle, TextField, Modal, Box } from "@mui/material";
+import { Alert, AlertTitle, TextField, Modal, Box, useMediaQuery, useTheme } from "@mui/material";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -38,13 +38,13 @@ const NombreModal: React.FC<NombreModalProps> = ({ open, onClose, onSubmit }) =>
 
   const NombreSchema = z.object({
     nombre: z.string().max(20).refine(value => /^[a-zA-Z]+$/.test(value), {
-        message: 'El nombre debe contener solo letras sin espcacios en blanco'
+      message: 'El nombre debe contener solo letras sin espcacios en blanco'
     }),
   });
 
   const handleSubmit = () => {
     try {
-      const validatedData = NombreSchema.parse({nombre});
+      const validatedData = NombreSchema.parse({ nombre });
       onSubmit(nombre);
       onClose();
     } catch (error) {
@@ -52,29 +52,29 @@ const NombreModal: React.FC<NombreModalProps> = ({ open, onClose, onSubmit }) =>
         console.error('Error de validación:', error.errors);
         const fieldErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
-            if (err.path) {
-                switch (err.code) {
-                    case 'too_small':
-                        fieldErrors[err.path.join('.')] = 'El valor es demasiado pequeño.';
-                        break;
-                    case 'too_big':
-                        fieldErrors[err.path.join('.')] = 'El valor es demasiado grande.';
-                        break;
-                    case 'invalid_type':
-                        fieldErrors[err.path.join('.')] = 'El tipo de dato es inválido.';
-                        break;
-                    default:
-                        fieldErrors[err.path.join('.')] = err.message;
-                        break;
-                }
+          if (err.path) {
+            switch (err.code) {
+              case 'too_small':
+                fieldErrors[err.path.join('.')] = 'El valor es demasiado pequeño.';
+                break;
+              case 'too_big':
+                fieldErrors[err.path.join('.')] = 'El valor es demasiado grande.';
+                break;
+              case 'invalid_type':
+                fieldErrors[err.path.join('.')] = 'El tipo de dato es inválido.';
+                break;
+              default:
+                fieldErrors[err.path.join('.')] = err.message;
+                break;
             }
+          }
         });
         setFormErrors(fieldErrors);
-    } else {
+      } else {
         console.error('Error inesperado:', error);
+      }
     }
-    }
-    
+
   };
 
   const handleNombreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -208,6 +208,9 @@ export default function Page(): React.JSX.Element {
   const [openModal, setOpenModal] = useState(false);
   const [openNombreModal, setOpenNombreModal] = useState(false);
   const [openFechaModal, setOpenFechaModal] = useState<boolean>(false);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -378,7 +381,7 @@ export default function Page(): React.JSX.Element {
         console.error('Error al obtener el archivo:', response);
       }
     } catch (error) {
-      
+
     }
   };
 
@@ -395,7 +398,7 @@ export default function Page(): React.JSX.Element {
   };
 
   const handleFechaSubmit = (fechaInicio: Date, fechaFin: Date) => {
-    fetchDataFecha(fechaInicio,fechaFin);
+    fetchDataFecha(fechaInicio, fechaFin);
   };
 
   const fetchDataFecha = async (fechaInicio: Date, fechaFin: Date) => {
@@ -403,11 +406,11 @@ export default function Page(): React.JSX.Element {
       const url = new URL('http://35.198.13.111:83/api/report/fecha');
       url.searchParams.append('fechaInicio', fechaInicio.toISOString());
       url.searchParams.append('fechaFin', fechaFin.toISOString());
-  
+
       const response = await fetch(url.toString(), {
         method: 'GET',
       });
-  
+
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -424,7 +427,7 @@ export default function Page(): React.JSX.Element {
       console.error('Error de red:', error);
     }
   };
-  
+
 
   const handleButtonFechaClick = () => {
     setOpenFechaModal(true);
@@ -437,7 +440,9 @@ export default function Page(): React.JSX.Element {
         <Stack direction="row" spacing={3}>
           <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
             <Typography variant="h4">Lista de Insumos</Typography>
-            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+            <Stack direction={isSmallScreen ? 'column' : 'row'}
+              spacing={1}
+              sx={{ alignItems: 'center' }}>
               <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonClick}>
                 Estado General
               </Button>
@@ -478,7 +483,7 @@ export default function Page(): React.JSX.Element {
           notifyD={notifyD}
           notifyA={notifyA}
         />
-        <NombreModal open={openNombreModal} onClose={handleCloseNombreClick} onSubmit={handleNombreSubmit}  />
+        <NombreModal open={openNombreModal} onClose={handleCloseNombreClick} onSubmit={handleNombreSubmit} />
         <FechaModal open={openFechaModal} onClose={() => setOpenFechaModal(false)} onSubmit={handleFechaSubmit} />
       </ToastProvider>
     </Stack>
