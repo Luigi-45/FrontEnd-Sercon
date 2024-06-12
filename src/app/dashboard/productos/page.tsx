@@ -434,25 +434,40 @@ export default function Page(): React.JSX.Element {
               spacing={isSmallScreen ? 2 : 4}
               justifyContent={isSmallScreen ? 'center' : 'flex-start'}
               mb={2}
+              flexWrap="wrap"
             >
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonClick}>
-                Estado General
-              </Button>
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonNombreClick}>
-                Estado por Nombre
-              </Button>
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonFechaClick}>
-                Estado por fecha
-              </Button>
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonSOClick}>
-                Alertas Stockout
-              </Button>
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonSAClick}>
-                Alertas Sobreabastecimiento
-              </Button>
-              <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonRotacionClick}>
-                Rotacion
-              </Button>
+              <Stack
+                direction={isSmallScreen ? 'column' : 'row'}
+                spacing={isSmallScreen ? 2 : 4}
+                justifyContent={isSmallScreen ? 'center' : 'flex-start'}
+                mb={2}
+              >
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonClick}>
+                  Estado General
+                </Button>
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonNombreClick}>
+                  Estado por Nombre
+                </Button>
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonFechaClick}>
+                  Estado por fecha
+                </Button>
+              </Stack>
+              <Stack
+                direction={isSmallScreen ? 'column' : 'row'}
+                spacing={isSmallScreen ? 2 : 4}
+                justifyContent={isSmallScreen ? 'center' : 'flex-start'}
+                mb={2}
+              >
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonSOClick}>
+                  Alertas Stockout
+                </Button>
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonSAClick}>
+                  Alertas Sobreabastecimiento
+                </Button>
+                <Button color="inherit" startIcon={<UploadIcon fontSize="var(--icon-fontSize-md)" />} onClick={handleButtonRotacionClick}>
+                  Rotacion
+                </Button>
+              </Stack>
             </Stack>
           </Stack>
           <div>
