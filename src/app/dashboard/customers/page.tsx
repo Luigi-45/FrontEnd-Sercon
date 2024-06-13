@@ -448,7 +448,7 @@ export default function Page(): React.JSX.Element {
             >
               {isSmallScreen ? (
                 <>
-                  <Stack direction="row" spacing={2} justifyContent="center">
+                  <Stack direction="row" spacing={1} justifyContent="center">
                     <Button
                       color="inherit"
                       startIcon={<UploadIcon fontSize="inherit" />}
@@ -464,7 +464,7 @@ export default function Page(): React.JSX.Element {
                       Estado por Nombre
                     </Button>
                   </Stack>
-                  <Stack direction="row" spacing={2} justifyContent="center">
+                  <Stack direction="row" spacing={1} justifyContent="center">
                     <Button
                       color="inherit"
                       startIcon={<UploadIcon fontSize="inherit" />}
@@ -480,7 +480,7 @@ export default function Page(): React.JSX.Element {
                       Alertas Stockout
                     </Button>
                   </Stack>
-                  <Stack direction="row" spacing={2} justifyContent="center">
+                  <Stack direction="row" spacing={1} justifyContent="center">
                     <Button
                       color="inherit"
                       startIcon={<UploadIcon fontSize="inherit" />}
