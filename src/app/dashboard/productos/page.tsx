@@ -534,12 +534,18 @@ export default function Page(): React.JSX.Element {
               )}
             </Stack>
           </Stack>
-          <div>
-            <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
+          <div style={{ flex: '0 0 auto', marginLeft: isSmallScreen ? 0 : 'auto' }}>
+            <Button
+              startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
+              variant="contained"
+              onClick={handleOpenModal}
+              sx={{ minWidth: '140px' }}
+            >
               Agregar Producto
             </Button>
           </div>
         </Stack>
+
         <AddProductoModal open={openModal} onClose={handleCloseModal} reloadTable={reloadTable} notify={notify} />
         <ProductosFilters onFilterChange={setFilterText} filterText={filterText} />
         <ProductosTable
