@@ -426,12 +426,12 @@ export default function Page(): React.JSX.Element {
   return (
     <Stack spacing={3}>
       <ToastProvider>
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={2}>
           <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
             <Typography variant="h4">Lista de Productos</Typography>
             <Stack
               direction={isSmallScreen ? 'column' : 'row'}
-              spacing={isSmallScreen ? 2 : 4}
+              spacing={isSmallScreen ? 1 : 2}
               justifyContent={isSmallScreen ? 'center' : 'flex-start'}
               mb={2}
             >
