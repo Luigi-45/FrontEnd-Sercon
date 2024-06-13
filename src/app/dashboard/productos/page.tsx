@@ -480,7 +480,7 @@ export default function Page(): React.JSX.Element {
             </Stack>
           </Stack>
 
-          <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'flex-end' }}>
+          <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'flex-start' }}>
             <Button
               startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
               variant="contained"
