@@ -33,7 +33,7 @@ const schema = zod.object({
   dni: zod.string().min(1, { message: 'DNI is required' }),
   terms: zod.boolean().refine((value) => value, 'You must accept the terms and conditions'),
   codigo: zod.string().min(6, { message: 'Codigo should be at least 6 characters' }),
-  rol: zod.number(),
+  rol: zod.string(),
 });
 
 type Values = zod.infer<typeof schema>;
@@ -41,7 +41,7 @@ type Values = zod.infer<typeof schema>;
 const LOGIN_API_BASE_URL = "http://34.95.254.36:8086/api/usuarios/save";
 const PERSONAL_API_BASE_URL = "http://34.95.254.36:8086/api/personal/save";
 
-const defaultValues = { nombres: '', apellidos: '', email: '', contraseña: '', edad: '', genero: '', num_telefonico: '', dni: '', terms: true ,codigo: '', rol: 0 } satisfies Values;
+const defaultValues = { nombres: '', apellidos: '', email: '', contraseña: '', edad: '', genero: '', num_telefonico: '', dni: '', terms: true ,codigo: '', rol: "" } satisfies Values;
 
 export function SignUpForm(): React.JSX.Element {
   const router = useRouter();
