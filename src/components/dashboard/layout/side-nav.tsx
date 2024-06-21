@@ -31,7 +31,14 @@ interface User {
   direccion?: string;
 }
 
-const rol = localStorage.getItem('rol');
+const [rol, setRol] = React.useState<string | null>(null);
+
+React.useEffect(() => {
+  const storedRol = localStorage.getItem('rol');
+  setRol(storedRol);
+}, []);
+
+
 const email = localStorage.getItem('user-email');
 const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
 
@@ -41,6 +48,7 @@ export function SideNav(): React.JSX.Element {
   const [user, setUser] = React.useState<User | null>(null);
 
   React.useEffect(() => {
+    if (!rol) return;
     const fetchUserFromAPI = async () => {
       try {
         const response = await fetch(USER_API_BASE_URL);
@@ -57,7 +65,7 @@ export function SideNav(): React.JSX.Element {
     };
 
     fetchUserFromAPI();
-  }, []);
+  }, [rol]);
 
   if (!user) {
     return <div>Cargando...</div>;
