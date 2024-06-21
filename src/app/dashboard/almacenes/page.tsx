@@ -39,6 +39,7 @@ export default function Page(): React.JSX.Element {
       if (role === '2') {
         router.push(paths.home);
       }
+      console.log(role)
     };
 
     checkUserRole();
