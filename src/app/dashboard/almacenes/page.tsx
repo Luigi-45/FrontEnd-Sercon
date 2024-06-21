@@ -37,7 +37,7 @@ export default function Page(): React.JSX.Element {
     const checkUserRole = () => {
       const role = localStorage.getItem('rol'); 
       if (role === '2') {
-        router.push(paths.home);
+        router.replace(paths.dashboard.overview);
       }
       console.log(role)
     };
