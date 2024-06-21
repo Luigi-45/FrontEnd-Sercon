@@ -37,7 +37,7 @@ export default function Page(): React.JSX.Element {
     if (typeof window !== 'undefined') {
       const rol = localStorage.getItem('rol');
       if (rol === '2') {
-        router.push('/insumos'); // Redirigir a la página de "Insumos"
+        router.push('/dashboard/customers'); // Redirigir a la página de "Insumos"
       }
     }
   }, [router]);
