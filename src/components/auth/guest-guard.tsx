@@ -27,9 +27,13 @@ export function GuestGuard({ children }: GuestGuardProps): React.JSX.Element | n
       return;
     }
 
+    const rol = localStorage.getItem('rol');
     if (user) {
       logger.debug('[GuestGuard]: User is logged in, redirecting to dashboard');
-      router.refresh
+      if(rol==="2"){
+        router.replace(paths.dashboard.customers);
+        return;
+      }
       router.replace(paths.dashboard.overview);
       return;
     }
