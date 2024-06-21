@@ -84,7 +84,7 @@ export default function Page(): React.JSX.Element {
             <Typography variant="h4">Lista de Almacenes</Typography>
           </Stack>
           <div>
-            {localStorage.getItem('role') === '2' ? (
+            {localStorage.getItem('rol') === '2' ? (
               <a href="/home" className="link">Ir a Home</a>
             ) : (
               <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
