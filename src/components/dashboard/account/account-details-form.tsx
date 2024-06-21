@@ -112,12 +112,6 @@ export function AccountDetailsForm(): React.JSX.Element {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid md={6} xs={12}>
-              <FormControl fullWidth>
-                <InputLabel>Direccion</InputLabel>
-                <OutlinedInput defaultValue={user.direccion || 'SERCON'} label="Direccion" name="Direccion" />
-              </FormControl>
-            </Grid>
           </Grid>
         </CardContent>
         <Divider />
