@@ -1,5 +1,6 @@
 'use client';
 import * as React from 'react';
+import { redirect } from 'next/navigation';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { Alert, AlertTitle } from "@mui/material";
@@ -37,7 +38,7 @@ export default function Page(): React.JSX.Element {
     if (typeof window !== 'undefined') {
       const rol = localStorage.getItem('rol');
       if (rol === '2') {
-        router.push('/dashboard/customers'); // Redirigir a la página de "Insumos"
+        redirect('/dashboard/customers'); 
       }
     }
   }, [router]);
