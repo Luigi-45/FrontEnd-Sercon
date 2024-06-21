@@ -77,6 +77,7 @@ class AuthClient {
       const token = generateToken();
       localStorage.setItem('custom-auth-token', token);
       localStorage.setItem('user-email', data.email);
+      localStorage.setItem('rol', data.rol);
   
       return {};
     } catch (error) {

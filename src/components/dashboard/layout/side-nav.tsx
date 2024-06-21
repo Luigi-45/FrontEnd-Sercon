@@ -19,7 +19,6 @@ import { isNavItemActive } from '@/lib/is-nav-item-active';
 import { Logo } from '@/components/core/logo';
 import Avatar from '@mui/material/Avatar';
 
-
 import { navItems } from './config';
 import { navIcons } from './nav-icons';
 
@@ -32,6 +31,7 @@ interface User {
   direccion?: string;
 }
 
+const rol = localStorage.getItem('rol');
 const email = localStorage.getItem('user-email');
 const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
 
@@ -63,6 +63,24 @@ export function SideNav(): React.JSX.Element {
     return <div>Cargando...</div>;
   }
 
+  const renderNavItems = ({ items = [], pathname }: { items?: NavItemConfig[]; pathname: string }): React.JSX.Element => {
+    const children = items.reduce((acc: React.ReactNode[], curr: NavItemConfig): React.ReactNode[] => {
+      const { key, title, ...item } = curr;
+
+      if (rol === '1' || (rol === '2' && title && ['Insumos', 'Productos', 'Categorias Insumo', 'Categorias Producto'].includes(title))) {
+        acc.push(<NavItem key={key} pathname={pathname} title={title} {...item} />);
+      }
+
+      return acc;
+    }, []);
+
+    return (
+      <Stack component="ul" spacing={1} sx={{ listStyle: 'none', m: 0, p: 0 }}>
+        {children}
+      </Stack>
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -92,7 +110,7 @@ export function SideNav(): React.JSX.Element {
       }}
     >
       <Stack alignItems="center" spacing={2}>
-        <div style={{ display: 'flex', alignItems: 'center' , justifyContent: 'center', padding: 18}}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 }}>
           <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-flex' }}>
             <Avatar src="/img/l.jpg" sx={{ width: 80, height: 80, marginRight: 1 }} />
           </Box>
@@ -100,7 +118,6 @@ export function SideNav(): React.JSX.Element {
             SERCON
           </Typography>
         </div>
-        
       </Stack>
 
       <Stack spacing={2} sx={{ p: 3 }} >
@@ -118,7 +135,7 @@ export function SideNav(): React.JSX.Element {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Avatar src="/img/logo.png" sx={{ marginRight: 1 }} />
             <Typography color="white" variant="body2">
-            {user.nombre} {user.apellido}
+              {user.nombre} {user.apellido}
             </Typography>
           </Box>
         </Box>
@@ -129,22 +146,6 @@ export function SideNav(): React.JSX.Element {
       </Box>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
     </Box>
-  );
-}
-
-function renderNavItems({ items = [], pathname }: { items?: NavItemConfig[]; pathname: string }): React.JSX.Element {
-  const children = items.reduce((acc: React.ReactNode[], curr: NavItemConfig): React.ReactNode[] => {
-    const { key, ...item } = curr;
-
-    acc.push(<NavItem key={key} pathname={pathname} {...item} />);
-
-    return acc;
-  }, []);
-
-  return (
-    <Stack component="ul" spacing={1} sx={{ listStyle: 'none', m: 0, p: 0 }}>
-      {children}
-    </Stack>
   );
 }
 
@@ -224,98 +225,95 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
           ) : null}
         </Box>
       </Box>
-      {open && (() => {
-        if (title === 'Insumos') {
-          return (
-            <Box
-              {...(href
-                ? {
-                  component: external ? 'a' : RouterLink,
-                  href: external ? href : paths.dashboard.categoriaInsumo,
-                  target: external ? '_blank' : undefined,
-                  rel: external ? 'noreferrer' : undefined,
-                  onClick: handleRedirect,
-                }
-                : { role: 'button' })}
-              sx={{
-                alignItems: 'center',
-                borderRadius: 1,
-                color: "var(--NavItem-color)",
-                cursor: 'pointer',
-                display: 'flex',
-                flex: '0 0 auto',
-                gap: 1,
-                p: '6px 16px',
-                position: 'relative',
-                textDecoration: 'none',
-                backgroundColor: redirected ? { backgroundColor: 'var(--NavItem-active-background)', color: 'var(--NavItem-active-color)' } : {
-                  backgroundColor
-                    : 'var(--NavItem-disabled-background)',
-                  color: "var(--NavItem-color)",
-                },
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
-                <Coffee weight={redirected ? 'fill' : undefined} fill={redirected ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'} />
-              </Box>
-              <Box sx={{ flex: '1 1 auto' }}>
-                <Typography
-                  component="span"
-                  sx={{ color: 'inherit', fontSize: '0.875rem', fontWeight: 500, lineHeight: '28px' }}
+      {(title === 'Insumos' || title === 'Productos') && open && (
+        <Box sx={{ pl: 4 }}>
+          {(() => {
+            if (title === 'Insumos') {
+              return (
+                <Box
+                  {...(href
+                    ? {
+                      component: external ? 'a' : RouterLink,
+                      href: external ? href : paths.dashboard.categoriaInsumo,
+                      target: external ? '_blank' : undefined,
+                      rel: external ? 'noreferrer' : undefined,
+                      onClick: handleRedirect,
+                    }
+                    : { role: 'button' })}
+                  sx={{
+                    alignItems: 'center',
+                    borderRadius: 1,
+                    color: 'var(--NavItem-color)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flex: '0 0 auto',
+                    gap: 1,
+                    p: '6px 16px',
+                    position: 'relative',
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    backgroundColor: redirected ? 'var(--NavItem-active-background)' : 'inherit',
+                    
+                  }}
                 >
-                  Categorias Insumo
-                </Typography>
-              </Box>
-            </Box>
-          );
-        } else {
-          return (
-            <Box
-              {...(href
-                ? {
-                  component: external ? 'a' : RouterLink,
-                  href: external ? href : paths.dashboard.categoriaProducto,
-                  target: external ? '_blank' : undefined,
-                  rel: external ? 'noreferrer' : undefined,
-                  onClick: handleRedirect,
-                }
-                : { role: 'button' })}
-              sx={{
-                alignItems: 'center',
-                borderRadius: 1,
-                color: "var(--NavItem-color)",
-                cursor: 'pointer',
-                display: 'flex',
-                flex: '0 0 auto',
-                gap: 1,
-                p: '6px 16px',
-                position: 'relative',
-                textDecoration: 'none',
-                backgroundColor: redirected ? { backgroundColor: 'var(--NavItem-active-background)', color: 'var(--NavItem-active-color)' } : {
-                  backgroundColor
-                    : 'var(--NavItem-disabled-background)',
-                  color: "var(--NavItem-color)",
-                },
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
-                <Coffee weight={redirected ? 'fill' : undefined} fill={redirected ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'} />
-              </Box>
-              <Box sx={{ flex: '1 1 auto' }}>
-                <Typography
-                  component="span"
-                  sx={{ color: 'inherit', fontSize: '0.875rem', fontWeight: 500, lineHeight: '28px' }}
+                  <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
+                    <Coffee weight={redirected ? 'fill' : undefined} fill={redirected ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'} />
+                  </Box>
+                  <Box sx={{ flex: '1 1 auto' }}>
+                    <Typography
+                      component="span"
+                      sx={{ color: 'inherit', fontSize: '0.875rem', fontWeight: 500, lineHeight: '28px' }}
+                    >
+                      Categorias Insumo
+                    </Typography>
+                  </Box>
+                </Box>
+              );
+            } else {
+              return (
+                <Box
+                  {...(href
+                    ? {
+                      component: external ? 'a' : RouterLink,
+                      href: external ? href : paths.dashboard.categoriaProducto,
+                      target: external ? '_blank' : undefined,
+                      rel: external ? 'noreferrer' : undefined,
+                      onClick: handleRedirect,
+                    }
+                    : { role: 'button' })}
+                  sx={{
+                    alignItems: 'center',
+                    borderRadius: 1,
+                    color: 'var(--NavItem-color)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flex: '0 0 auto',
+                    gap: 1,
+                    p: '6px 16px',
+                    position: 'relative',
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    backgroundColor: redirected ? 'var(--NavItem-active-background)' : 'inherit',
+                    
+                  }}
                 >
-                  Categorias Producto
-                </Typography>
-              </Box>
-            </Box>
-          );
-        }
-      })()}
-
+                  <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
+                    <Coffee weight={redirected ? 'fill' : undefined} fill={redirected ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'} />
+                  </Box>
+                  <Box sx={{ flex: '1 1 auto' }}>
+                    <Typography
+                      component="span"
+                      sx={{ color: 'inherit', fontSize: '0.875rem', fontWeight: 500, lineHeight: '28px' }}
+                    >
+                      Categorias Producto
+                    </Typography>
+                  </Box>
+                </Box>
+              );
+            }
+          })()}
+        </Box>
+      )}
     </li>
   );
 }
