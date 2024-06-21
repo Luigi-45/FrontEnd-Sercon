@@ -12,7 +12,7 @@ import type { Almacen } from '@/components/dashboard/almacenes/almacenes-table';
 import AddAlmacenModal from '@/components/dashboard/almacenes/AddAlmacenModal';
 import { config } from '@/config';
 import { handleDeleteAlmacen } from "@/components/dashboard/almacenes/ActionsAlmacen";
-import { AlmacenesFilters } from '@/components/dashboard/almacenes/almacenes-filters';
+import { AlmacenesFilters } from "@/components/dashboard/almacenes/almacenes-filters";
 import { AlmacenesTable } from "@/components/dashboard/almacenes/almacenes-table";
 import ToastProvider from "../../../components/alerts/ToastProvider";
 import { toast } from 'react-toastify';
@@ -31,13 +31,16 @@ export default function Page(): React.JSX.Element {
   const [filterText, setFilterText] = useState<string>('');
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
-  const rol = localStorage.getItem('rol');
 
   useEffect(() => {
-    if (rol === '2') {
-      router.push('/dashboard/customers'); 
+    // Verificar rol solo en el cliente
+    if (typeof window !== 'undefined') {
+      const rol = localStorage.getItem('rol');
+      if (rol === '2') {
+        router.push('/insumos'); // Redirigir a la página de "Insumos"
+      }
     }
-  }, [rol, router]);
+  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {
