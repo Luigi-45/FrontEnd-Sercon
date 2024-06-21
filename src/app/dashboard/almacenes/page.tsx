@@ -33,17 +33,6 @@ export default function Page(): React.JSX.Element {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const checkUserRole = () => {
-      const role = localStorage.getItem('rol'); 
-      if (role === '2') {
-        router.replace(paths.dashboard.overview);
-      }
-      console.log(role)
-    };
-
-    checkUserRole();
-  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {
