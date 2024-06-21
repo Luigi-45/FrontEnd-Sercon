@@ -31,13 +31,6 @@ interface User {
   direccion?: string;
 }
 
-const [rol, setRol] = React.useState<string | null>(null);
-
-React.useEffect(() => {
-  const storedRol = localStorage.getItem('rol');
-  setRol(storedRol);
-}, []);
-
 
 const email = localStorage.getItem('user-email');
 const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
@@ -46,6 +39,12 @@ export function SideNav(): React.JSX.Element {
   const pathname = usePathname();
 
   const [user, setUser] = React.useState<User | null>(null);
+  const [rol, setRol] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const storedRol = localStorage.getItem('rol');
+    setRol(storedRol);
+  }, []);
 
   React.useEffect(() => {
     if (!rol) return;
@@ -261,7 +260,7 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
                     textDecoration: 'none',
                     whiteSpace: 'nowrap',
                     backgroundColor: redirected ? 'var(--NavItem-active-background)' : 'inherit',
-                    
+
                   }}
                 >
                   <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
@@ -302,7 +301,7 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
                     textDecoration: 'none',
                     whiteSpace: 'nowrap',
                     backgroundColor: redirected ? 'var(--NavItem-active-background)' : 'inherit',
-                    
+
                   }}
                 >
                   <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
