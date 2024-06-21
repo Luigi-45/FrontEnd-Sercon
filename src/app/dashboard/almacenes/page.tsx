@@ -35,7 +35,7 @@ export default function Page(): React.JSX.Element {
 
   useEffect(() => {
     if (rol === '2') {
-      router.push('/customers'); 
+      router.push('/dashboard/customers'); 
     }
   }, [rol, router]);
 
