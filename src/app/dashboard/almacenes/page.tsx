@@ -32,17 +32,6 @@ export default function Page(): React.JSX.Element {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const router = useRouter();
 
-  // Redirigir usuarios con rol '2' a '/dashboard/customers'
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const rol = localStorage.getItem('rol');
-      if (rol === '2') {
-        router.push('/dashboard/customers'); 
-      }
-    }
-  }, [router]);
-
-  // Obtener la lista de almacenes desde la API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,7 +46,6 @@ export default function Page(): React.JSX.Element {
     fetchData();
   }, []);
 
-  // Filtrar la lista de almacenes basado en el texto de búsqueda
   useEffect(() => {
     const filteredData = almacen.filter((item: Almacen) =>
       item.nombre_almacen.toLowerCase().includes(filterText.toLowerCase())
@@ -75,7 +63,7 @@ export default function Page(): React.JSX.Element {
     setOpenModal(false);
   };
 
-  // Recargar la tabla de almacenes
+  
   async function reloadTable() {
     try {
       const response = await fetch(ALMACEN_API_BASE_URL);
