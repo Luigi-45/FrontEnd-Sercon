@@ -32,9 +32,6 @@ interface User {
 }
 
 
-const email = localStorage.getItem('user-email');
-const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
-
 export function SideNav(): React.JSX.Element {
   const pathname = usePathname();
 
@@ -49,6 +46,8 @@ export function SideNav(): React.JSX.Element {
   React.useEffect(() => {
     if (!rol) return;
     const fetchUserFromAPI = async () => {
+      const email = localStorage.getItem('user-email');
+      const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
       try {
         const response = await fetch(USER_API_BASE_URL);
 
