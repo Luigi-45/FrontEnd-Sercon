@@ -1,17 +1,13 @@
 'use client';
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { paths } from '@/paths';
 import { useState, useEffect } from 'react';
-import { Alert, AlertTitle } from "@mui/material";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
-import { Upload as UploadIcon } from '@phosphor-icons/react/dist/ssr/Upload';
 import type { Almacen } from '@/components/dashboard/almacenes/almacenes-table';
 import AddAlmacenModal from '@/components/dashboard/almacenes/AddAlmacenModal';
-import { config } from '@/config';
 import { handleDeleteAlmacen } from "@/components/dashboard/almacenes/ActionsAlmacen";
 import { AlmacenesFilters } from "@/components/dashboard/almacenes/almacenes-filters";
 import { AlmacenesTable } from "@/components/dashboard/almacenes/almacenes-table";
@@ -31,8 +27,6 @@ export default function Page(): React.JSX.Element {
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [filterText, setFilterText] = useState<string>('');
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const router = useRouter();
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +59,7 @@ export default function Page(): React.JSX.Element {
     setOpenModal(false);
   };
 
+  
   async function reloadTable() {
     try {
       const response = await fetch(ALMACEN_API_BASE_URL);
@@ -84,13 +79,9 @@ export default function Page(): React.JSX.Element {
             <Typography variant="h4">Lista de Almacenes</Typography>
           </Stack>
           <div>
-            {localStorage.getItem('rol') === '2' ? (
-              <a href="/home" className="link">Ir a Home</a>
-            ) : (
-              <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
-                Agregar Almacén
-              </Button>
-            )}
+            <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
+              Agregar Almacén
+            </Button>
           </div>
         </Stack>
         <AddAlmacenModal open={openModal} onClose={handleCloseModal} reloadTable={reloadTable} notify={notify} />
