@@ -1,8 +1,7 @@
 'use client';
 import * as React from 'react';
-import { redirect } from 'next/navigation';
-import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import { Alert, AlertTitle } from "@mui/material";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -15,7 +14,7 @@ import { config } from '@/config';
 import { handleDeleteAlmacen } from "@/components/dashboard/almacenes/ActionsAlmacen";
 import { AlmacenesFilters } from "@/components/dashboard/almacenes/almacenes-filters";
 import { AlmacenesTable } from "@/components/dashboard/almacenes/almacenes-table";
-import ToastProvider from "../../../components/alerts/ToastProvider";
+import ToastProvider from "@/components/alerts/ToastProvider";
 import { toast } from 'react-toastify';
 
 const ALMACEN_API_BASE_URL = "http://35.198.40.220:8085/api/almacen";
@@ -25,29 +24,30 @@ const notifyD = () => toast.error("Se eliminó correctamente");
 const notifyA = () => toast.success("Se actualizó correctamente");
 
 export default function Page(): React.JSX.Element {
-  const [almacen, setAlmacen] = useState([]);
+  const [almacen, setAlmacen] = useState<Almacen[]>([]);
   const [filteredAlmacen, setFilteredAlmacen] = useState<Almacen[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [filterText, setFilterText] = useState<string>('');
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const router = useRouter();
 
+  // Redirigir usuarios con rol '2' a '/dashboard/customers'
   useEffect(() => {
-    // Verificar rol solo en el cliente
     if (typeof window !== 'undefined') {
       const rol = localStorage.getItem('rol');
       if (rol === '2') {
-        redirect('/dashboard/customers'); 
+        router.push('/dashboard/customers'); 
       }
     }
   }, [router]);
 
+  // Obtener la lista de almacenes desde la API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(ALMACEN_API_BASE_URL);
-        const data = await response.json();
+        const data: Almacen[] = await response.json();
         setAlmacen(data);
         setFilteredAlmacen(data);
       } catch (error) {
@@ -57,6 +57,7 @@ export default function Page(): React.JSX.Element {
     fetchData();
   }, []);
 
+  // Filtrar la lista de almacenes basado en el texto de búsqueda
   useEffect(() => {
     const filteredData = almacen.filter((item: Almacen) =>
       item.nombre_almacen.toLowerCase().includes(filterText.toLowerCase())
@@ -74,10 +75,11 @@ export default function Page(): React.JSX.Element {
     setOpenModal(false);
   };
 
+  // Recargar la tabla de almacenes
   async function reloadTable() {
     try {
       const response = await fetch(ALMACEN_API_BASE_URL);
-      const data = await response.json();
+      const data: Almacen[] = await response.json();
       setAlmacen(data);
       setFilteredAlmacen(data);
     } catch (error) {
@@ -94,7 +96,7 @@ export default function Page(): React.JSX.Element {
           </Stack>
           <div>
             <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
-              Agregar Almacen
+              Agregar Almacén
             </Button>
           </div>
         </Stack>
