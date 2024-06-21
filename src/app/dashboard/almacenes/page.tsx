@@ -1,6 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import { paths } from '@/paths';
 import { useState, useEffect } from 'react';
 import { Alert, AlertTitle } from "@mui/material";
 import Button from '@mui/material/Button';
@@ -33,6 +34,17 @@ export default function Page(): React.JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
+    const checkUserRole = () => {
+      const role = localStorage.getItem('rol'); 
+      if (role === '2') {
+        router.push(paths.home);
+      }
+    };
+
+    checkUserRole();
+  }, [router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(ALMACEN_API_BASE_URL);
@@ -63,7 +75,6 @@ export default function Page(): React.JSX.Element {
     setOpenModal(false);
   };
 
-  
   async function reloadTable() {
     try {
       const response = await fetch(ALMACEN_API_BASE_URL);
@@ -83,9 +94,13 @@ export default function Page(): React.JSX.Element {
             <Typography variant="h4">Lista de Almacenes</Typography>
           </Stack>
           <div>
-            <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
-              Agregar Almacén
-            </Button>
+            {localStorage.getItem('role') === '2' ? (
+              <a href="/home" className="link">Ir a Home</a>
+            ) : (
+              <Button startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />} variant="contained" onClick={handleOpenModal}>
+                Agregar Almacén
+              </Button>
+            )}
           </div>
         </Stack>
         <AddAlmacenModal open={openModal} onClose={handleCloseModal} reloadTable={reloadTable} notify={notify} />
