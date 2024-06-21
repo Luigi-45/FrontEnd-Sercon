@@ -34,8 +34,15 @@ const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${e
 
 export function AccountDetailsForm(): React.JSX.Element {
   const [user, setUser] = React.useState<User | null>(null);
+  const [rol, setRol] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    const storedRol = localStorage.getItem('rol');
+    setRol(storedRol);
+  }, []);
+
+  React.useEffect(() => {
+    if (!rol) return;
     const fetchUserFromAPI = async () => {
       try {
         const response = await fetch(USER_API_BASE_URL);
@@ -52,7 +59,7 @@ export function AccountDetailsForm(): React.JSX.Element {
     };
 
     fetchUserFromAPI();
-  }, []);
+  }, [rol]);
 
   if (!user) {
     return <div>Cargando...</div>;

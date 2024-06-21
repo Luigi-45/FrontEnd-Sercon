@@ -21,8 +21,15 @@ interface User {
 
 export function AccountInfo(): React.JSX.Element {
   const [userd, setUser] = React.useState<User | null>(null);
+  const [rol, setRol] = React.useState<string | null>(null);
 
   React.useEffect(() => {
+    const storedRol = localStorage.getItem('rol');
+    setRol(storedRol);
+  }, []);
+
+  React.useEffect(() => {
+    if (!rol) return;
     const fetchUserFromAPI = async () => {
       const email = localStorage.getItem('user-email');
       const USER_API_BASE_URL = `http://34.95.254.36:8086/api/personal/findByEmail/${email}`;
@@ -41,7 +48,7 @@ export function AccountInfo(): React.JSX.Element {
       }
     };
     fetchUserFromAPI();
-  }, []);
+  }, [rol]);
 
   if (!userd) {
     return <div>Cargando...</div>;
