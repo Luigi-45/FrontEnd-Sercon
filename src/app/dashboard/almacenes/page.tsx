@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { paths } from '@/paths';
 import { logger } from '@/lib/default-logger';
