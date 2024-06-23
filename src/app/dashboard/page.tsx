@@ -1,6 +1,10 @@
 'use client';
 import * as React from 'react';
 import type { Metadata } from 'next';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { paths } from '@/paths';
+import { logger } from '@/lib/default-logger';
 import Grid from '@mui/material/Unstable_Grid2';
 import { config } from '@/config';
 import { Budget } from '@/components/dashboard/overview/budget';
@@ -82,9 +86,26 @@ function groupByMonth(movimientos: Movimiento[]): MovimientoPorMes {
 }
 
 export default function Page(): React.JSX.Element {
+  const router = useRouter();
   const [sumasNegativos, setSumasNegativos] = React.useState<SumaNegativos | null>(null);
   const [movimientosPorMes, setMovimientosPorMes] = React.useState<MovimientoPorMes | null>(null);
+  const [isChecking, setIsChecking] = useState<boolean>(true);
 
+  useEffect(() => {
+    const checkPermissions = async () => {
+      const rol = localStorage.getItem('rol');
+      if (rol !== '1') {
+        logger.debug('[Page]: Usuario no tiene el rol de validador, redirigiendo');
+        router.replace(paths.dashboard.customers); 
+        return;
+      }
+      setIsChecking(false);
+    };
+
+    checkPermissions().catch(() => {
+    });
+  }, [router]);
+  
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -104,8 +125,8 @@ export default function Page(): React.JSX.Element {
   const tipoItem1 = sumasNegativos?.tipoItem1 ?? 0;
   const tipoItem2 = sumasNegativos?.tipoItem2 ?? 0;
 
-const chart1 = (tipoItem1 * 100) / (-tipoItem2 + tipoItem1);
-const chart2 = (-tipoItem2 * 100) / (-tipoItem2 + tipoItem1);
+  const chart1 = (tipoItem1 * 100) / (-tipoItem2 + tipoItem1);
+  const chart2 = (-tipoItem2 * 100) / (-tipoItem2 + tipoItem1);
 
   const value = sumasNegativos?.total ? Number((sumasNegativos.total / 3).toFixed(2)) : 0;
 
