@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { paths } from '@/paths';
+import { logger } from '@/lib/default-logger';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -21,12 +23,29 @@ const notifyD = () => toast.error("Se eliminó correctamente");
 const notifyA = () => toast.success("Se actualizó correctamente");
 
 export default function Page(): React.JSX.Element {
+  const router = useRouter();
   const [almacen, setAlmacen] = useState<Almacen[]>([]);
   const [filteredAlmacen, setFilteredAlmacen] = useState<Almacen[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const [filterText, setFilterText] = useState<string>('');
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [isChecking, setIsChecking] = useState<boolean>(true);
+
+  useEffect(() => {
+    const checkPermissions = async () => {
+      const rol = localStorage.getItem('rol');
+      if (rol !== '1') {
+        logger.debug('[Page]: Usuario no tiene el rol de validador, redirigiendo');
+        router.replace(paths.home); 
+        return;
+      }
+      setIsChecking(false);
+    };
+
+    checkPermissions().catch(() => {
+    });
+  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {

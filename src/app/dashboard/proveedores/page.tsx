@@ -41,7 +41,7 @@ export default function Page(): React.JSX.Element {
   useEffect(() => {
     const checkPermissions = async () => {
       const rol = localStorage.getItem('rol');
-      if (rol !== '2') {
+      if (rol !== '1') {
         logger.debug('[Page]: Usuario no tiene el rol de validador, redirigiendo');
         router.replace(paths.home); 
         return;
@@ -50,7 +50,6 @@ export default function Page(): React.JSX.Element {
     };
 
     checkPermissions().catch(() => {
-      // noop
     });
   }, [router]);
 
