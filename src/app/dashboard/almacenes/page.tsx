@@ -37,7 +37,7 @@ export default function Page(): React.JSX.Element {
       const rol = localStorage.getItem('rol');
       if (rol !== '1') {
         logger.debug('[Page]: Usuario no tiene el rol de validador, redirigiendo');
-        router.replace(paths.home); 
+        router.replace(paths.dashboard.customers); 
         return;
       }
       setIsChecking(false);
