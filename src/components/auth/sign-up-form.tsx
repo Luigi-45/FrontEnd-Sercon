@@ -112,7 +112,10 @@ export function SignUpForm(): React.JSX.Element {
 
       await checkSession?.();
 
+      
+
       router.refresh();
+      router.replace(paths.auth.signIn); 
     },
     [checkSession, router, setError]
   );
